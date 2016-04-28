@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A2A4B6741CD21D6D00546326 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4B6731CD21D6D00546326 /* main.swift */; };
+		A2A4B67D1CD21F4C00546326 /* IsPrime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4B67C1CD21F4C00546326 /* IsPrime.swift */; };
+		A2A4B68B1CD2228F00546326 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4B6841CD221FE00546326 /* test.swift */; };
+		A2A4B68C1CD2232D00546326 /* IsPrimeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4B67A1CD21F3700546326 /* IsPrimeTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +28,22 @@
 /* Begin PBXFileReference section */
 		A2A4B6701CD21D6D00546326 /* swiftjson */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftjson; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A4B6731CD21D6D00546326 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A2A4B67A1CD21F3700546326 /* IsPrimeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IsPrimeTest.swift; path = ../swiftjson/IsPrimeTest.swift; sourceTree = "<group>"; };
+		A2A4B67C1CD21F4C00546326 /* IsPrime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsPrime.swift; sourceTree = "<group>"; };
+		A2A4B6821CD221FE00546326 /* test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A4B6841CD221FE00546326 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		A2A4B6861CD221FE00546326 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A2A4B66D1CD21D6D00546326 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A4B67F1CD221FE00546326 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				A2A4B6721CD21D6D00546326 /* swiftjson */,
+				A2A4B6831CD221FE00546326 /* test */,
 				A2A4B6711CD21D6D00546326 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				A2A4B6701CD21D6D00546326 /* swiftjson */,
+				A2A4B6821CD221FE00546326 /* test.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,8 +75,19 @@
 			isa = PBXGroup;
 			children = (
 				A2A4B6731CD21D6D00546326 /* main.swift */,
+				A2A4B67C1CD21F4C00546326 /* IsPrime.swift */,
 			);
 			path = swiftjson;
+			sourceTree = "<group>";
+		};
+		A2A4B6831CD221FE00546326 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				A2A4B67A1CD21F3700546326 /* IsPrimeTest.swift */,
+				A2A4B6841CD221FE00546326 /* test.swift */,
+				A2A4B6861CD221FE00546326 /* Info.plist */,
+			);
+			path = test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,17 +110,40 @@
 			productReference = A2A4B6701CD21D6D00546326 /* swiftjson */;
 			productType = "com.apple.product-type.tool";
 		};
+		A2A4B6811CD221FE00546326 /* test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2A4B6871CD221FE00546326 /* Build configuration list for PBXNativeTarget "test" */;
+			buildPhases = (
+				A2A4B67E1CD221FE00546326 /* Sources */,
+				A2A4B67F1CD221FE00546326 /* Frameworks */,
+				A2A4B6801CD221FE00546326 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = test;
+			productName = test;
+			productReference = A2A4B6821CD221FE00546326 /* test.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		A2A4B6681CD21D6D00546326 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = pigoneand;
 				TargetAttributes = {
 					A2A4B66F1CD21D6D00546326 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					A2A4B6811CD221FE00546326 = {
 						CreatedOnToolsVersion = 7.3;
 					};
 				};
@@ -110,9 +161,20 @@
 			projectRoot = "";
 			targets = (
 				A2A4B66F1CD21D6D00546326 /* swiftjson */,
+				A2A4B6811CD221FE00546326 /* test */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A2A4B6801CD221FE00546326 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A2A4B66C1CD21D6D00546326 /* Sources */ = {
@@ -120,6 +182,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2A4B6741CD21D6D00546326 /* main.swift in Sources */,
+				A2A4B67D1CD21F4C00546326 /* IsPrime.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A4B67E1CD221FE00546326 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2A4B68C1CD2232D00546326 /* IsPrimeTest.swift in Sources */,
+				A2A4B68B1CD2228F00546326 /* test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +294,28 @@
 			};
 			name = Release;
 		};
+		A2A4B6881CD221FE00546326 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pigoneand.test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A2A4B6891CD221FE00546326 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pigoneand.test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -239,6 +333,14 @@
 			buildConfigurations = (
 				A2A4B6781CD21D6E00546326 /* Debug */,
 				A2A4B6791CD21D6E00546326 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A2A4B6871CD221FE00546326 /* Build configuration list for PBXNativeTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2A4B6881CD221FE00546326 /* Debug */,
+				A2A4B6891CD221FE00546326 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
