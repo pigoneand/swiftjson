@@ -10,3 +10,10 @@ import Foundation
 
 print("Hello, World!")
 
+let s = "\n";
+
+for var i = s.characters.startIndex; i < s.characters.endIndex; i = i.successor()
+{
+    print("ith character: \(i)")
+    print(s[i]);
+}

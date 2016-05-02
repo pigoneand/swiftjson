@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A20CEF531CD4B3AF00607465 /* json_lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CEF521CD4B3AF00607465 /* json_lexer.swift */; };
+		A20CEF551CD642A100607465 /* common_string_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CEF541CD642A100607465 /* common_string_extension.swift */; };
 		A2A4B6741CD21D6D00546326 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4B6731CD21D6D00546326 /* main.swift */; };
-		A2A4B67D1CD21F4C00546326 /* IsPrime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4B67C1CD21F4C00546326 /* IsPrime.swift */; };
 		A2A4B68B1CD2228F00546326 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4B6841CD221FE00546326 /* test.swift */; };
 		A2A4B68C1CD2232D00546326 /* IsPrimeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4B67A1CD21F3700546326 /* IsPrimeTest.swift */; };
 /* End PBXBuildFile section */
@@ -26,10 +27,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A20CEF521CD4B3AF00607465 /* json_lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json_lexer.swift; sourceTree = "<group>"; };
+		A20CEF541CD642A100607465 /* common_string_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common_string_extension.swift; sourceTree = "<group>"; };
 		A2A4B6701CD21D6D00546326 /* swiftjson */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftjson; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A4B6731CD21D6D00546326 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A2A4B67A1CD21F3700546326 /* IsPrimeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IsPrimeTest.swift; path = ../swiftjson/IsPrimeTest.swift; sourceTree = "<group>"; };
-		A2A4B67C1CD21F4C00546326 /* IsPrime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsPrime.swift; sourceTree = "<group>"; };
 		A2A4B6821CD221FE00546326 /* test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A4B6841CD221FE00546326 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		A2A4B6861CD221FE00546326 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,7 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				A2A4B6731CD21D6D00546326 /* main.swift */,
-				A2A4B67C1CD21F4C00546326 /* IsPrime.swift */,
+				A20CEF521CD4B3AF00607465 /* json_lexer.swift */,
+				A20CEF541CD642A100607465 /* common_string_extension.swift */,
 			);
 			path = swiftjson;
 			sourceTree = "<group>";
@@ -182,7 +185,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2A4B6741CD21D6D00546326 /* main.swift in Sources */,
-				A2A4B67D1CD21F4C00546326 /* IsPrime.swift in Sources */,
+				A20CEF531CD4B3AF00607465 /* json_lexer.swift in Sources */,
+				A20CEF551CD642A100607465 /* common_string_extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +339,7 @@
 				A2A4B6791CD21D6E00546326 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A2A4B6871CD221FE00546326 /* Build configuration list for PBXNativeTarget "test" */ = {
 			isa = XCConfigurationList;
@@ -343,6 +348,7 @@
 				A2A4B6891CD221FE00546326 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
