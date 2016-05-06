@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>swiftjsonTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>test.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,21 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>A20CEF911CDC32E200607465</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A20CEF9A1CDC32E200607465</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A20CEFAE1CDC350100607465</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A2A4B66F1CD21D6D00546326</key>
 		<dict>
 			<key>primary</key>

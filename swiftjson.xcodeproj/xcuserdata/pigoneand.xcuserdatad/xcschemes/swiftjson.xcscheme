@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A2A4B66F1CD21D6D00546326"
-               BuildableName = "swiftjson"
+               BlueprintIdentifier = "A20CEF911CDC32E200607465"
+               BuildableName = "swiftjson.framework"
                BlueprintName = "swiftjson"
                ReferencedContainer = "container:swiftjson.xcodeproj">
             </BuildableReference>
@@ -32,8 +32,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2A4B66F1CD21D6D00546326"
-            BuildableName = "swiftjson"
+            BlueprintIdentifier = "A20CEF911CDC32E200607465"
+            BuildableName = "swiftjson.framework"
             BlueprintName = "swiftjson"
             ReferencedContainer = "container:swiftjson.xcodeproj">
          </BuildableReference>
@@ -55,8 +55,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2A4B66F1CD21D6D00546326"
-            BuildableName = "swiftjson"
+            BlueprintIdentifier = "A20CEF911CDC32E200607465"
+            BuildableName = "swiftjson.framework"
             BlueprintName = "swiftjson"
             ReferencedContainer = "container:swiftjson.xcodeproj">
          </BuildableReference>
@@ -74,8 +74,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2A4B66F1CD21D6D00546326"
-            BuildableName = "swiftjson"
+            BlueprintIdentifier = "A20CEF911CDC32E200607465"
+            BuildableName = "swiftjson.framework"
             BlueprintName = "swiftjson"
             ReferencedContainer = "container:swiftjson.xcodeproj">
          </BuildableReference>
