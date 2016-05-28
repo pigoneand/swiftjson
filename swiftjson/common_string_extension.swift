@@ -37,7 +37,7 @@ extension String
     func subString(startIndex: Int, length: Int) -> String
     {
         let start = self.startIndex.advancedBy(startIndex)
-        let end = self.startIndex.advancedBy(startIndex + length)
+        let end = self.startIndex.advancedBy(min(startIndex + length, self.length))
         return self.substringWithRange(start..<end)
     }
 }

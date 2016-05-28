@@ -67,6 +67,28 @@ enum JsonLexToken
     case ERROR(String)
 }
 
+extension JsonLexToken : Equatable {}
+
+func ==(lhs: JsonLexToken, rhs: JsonLexToken) -> Bool {
+    switch (lhs, rhs) {
+    case (let .NUMBER(n1), let .NUMBER(n2)):
+        return n1 == n2;
+        
+    case (let .STRING(s1), let .STRING(s2)):
+        return s1 == s2
+        
+    case (.TRUE, .TRUE):
+        return true
+    case (.FALSE, .FALSE):
+        return true
+    case (.NULL, .NULL):
+        return true
+        
+    default:
+        return false
+    }
+}
+
 // 定义JsonLexTokenGenerator 类型，表示将一个String转换为JsonLexToken的函数
 // 输入为(String, Int) String 表示输入的字符串， Int表示下一个可读字符的offset
 // 输出为(JsonLexToken?, Int) 后者表示读取了token之后，下一个可读字符的offset
@@ -234,4 +256,38 @@ let tokenGeneratorList : [JsonLexTokenGenerator] = [
     NumberTokenGenerator
 ]
 
+// parser, 输入一段合法或者非法的json字符串，返回token 列表，如果包含错误， JsonLexToken中会包含 ERROR
+func JsonLexParser(s:String) -> [JsonLexToken]
+{
+    var currentOffset:Int = 0;
+    var result: [JsonLexToken] = [];
+    
+    while (currentOffset < s.length) {
+        var shouldContinue = false;
+        
+        for tokenGen in tokenGeneratorList {
+            let (token, offset) = tokenGen(s, currentOffset);
+            if (token != nil) {
+                result.append(token!);
+                currentOffset = offset;
+                
+                switch (token!) {
+                case .ERROR(_):
+                    shouldContinue = false;
+                default:
+                    shouldContinue = true;
+                }
+                
+                break;
+            }
+        }
+        
+        if (!shouldContinue) {
+            result.append(JsonLexToken.ERROR("cannot continue: \(currentOffset)"));
+            break;
+        }
+    }
+    
+    return result;
+}
 
