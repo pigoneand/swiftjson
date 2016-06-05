@@ -62,11 +62,10 @@ public enum JsonLexToken
     case FALSE
     case TRUE
     case NULL
-    
-    // error
-    case ERROR(String)
+    case BLANK
 }
 
+// 用于判断两个JsonLexToken 是否相等
 extension JsonLexToken : Equatable {}
 
 public func ==(lhs: JsonLexToken, rhs: JsonLexToken) -> Bool {
@@ -86,7 +85,13 @@ public func ==(lhs: JsonLexToken, rhs: JsonLexToken) -> Bool {
     case (.BEGIN_OBJECT, .BEGIN_OBJECT):
         return true
     case(.END_OBJECT, .END_OBJECT):
-        return true;
+        return true
+    case (.BEGIN_ARRAY, .BEGIN_ARRAY):
+        return true
+    case (.END_ARRAY, .END_ARRAY):
+        return true
+    case(.BLANK, .BLANK):
+        return true
         
     default:
         return false
@@ -95,17 +100,20 @@ public func ==(lhs: JsonLexToken, rhs: JsonLexToken) -> Bool {
 
 // 定义JsonLexTokenGenerator 类型，表示将一个String转换为JsonLexToken的函数
 // 输入为(String, Int) String 表示输入的字符串， Int表示下一个可读字符的offset
-// 输出为(JsonLexToken?, Int) 后者表示读取了token之后，下一个可读字符的offset
-typealias JsonLexTokenGenerator = (String, Int) -> (JsonLexToken?, Int)
+// 输出为(JsonLexToken?, Int, String?)
+//     JsonLexToken? 如果等于nil，表示当前generator无法parse有效的字段
+//     Int表示读取了token之后，下一个可读字符的offset
+//     String 表示错误信息，如果nil，表示没有错误，否则表示在parse lex过程中出现了不可忽略的错误
+typealias JsonLexTokenGenerator = (String, Int) -> (JsonLexToken?, Int, String?)
 
-func NilTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int)
+func NilTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int, String?)
 {
     let emptyCharacters: Set<Character> = ["\r", "\n", " ", "\t"];
     return emptyCharacters.contains(s[s.startIndex.advancedBy(offset)])
-        ? (nil, offset + 1) : (nil, offset);
+        ? (JsonLexToken.BLANK, offset + 1, nil) : (nil, offset, nil);
 }
 
-func ConstWordTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int)
+func ConstWordTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int, String?)
 {
     let constWordAndTokens: [(String, JsonLexToken)] =
     [
@@ -124,17 +132,17 @@ func ConstWordTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int)
     {
         if (s.subString(offset, length: word.length) == word)
         {
-            return (token, offset + word.length);
+            return (token, offset + word.length, nil);
         }
     }
-    return (nil, offset);
+    return (nil, offset, nil);
 }
 
-func StringTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int)
+func StringTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int, String?)
 {
     guard s[offset] == "\"" else
     {
-        return (nil, offset);
+        return (nil, offset, nil);
     }
     
     var currentOffset = offset + 1;
@@ -144,7 +152,7 @@ func StringTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int)
         let currentChar = s[currentOffset];
         if (currentChar == "\"")
         {
-            return (JsonLexToken.STRING(currentString), currentOffset + 1);
+            return (JsonLexToken.STRING(currentString), currentOffset + 1, nil);
         }
         
         /*
@@ -179,7 +187,7 @@ func StringTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int)
         currentString.append(currentChar);
     }
     
-    return (JsonLexToken.ERROR("\" is not match at position: \(offset)"), -1);
+    return (nil, -1, "\" is not match at position: \(offset)");
 }
 
 /*
@@ -195,7 +203,7 @@ func StringTokenGenerator(s: String, offset: Int) -> (JsonLexToken?, Int)
  zero = %x30                ; 0
  TODO(pigoneand): care about zero!
  */
-func NumberTokenGenerator(s:String, offset: Int) -> (JsonLexToken?, Int)
+func NumberTokenGenerator(s:String, offset: Int) -> (JsonLexToken?, Int, String?)
 {
     func readDigits(s:String, inout offset: Int) -> Int
     {
@@ -220,7 +228,7 @@ func NumberTokenGenerator(s:String, offset: Int) -> (JsonLexToken?, Int)
     
     guard s[curOffset] == "-" || s[curOffset] >= "0" && s[curOffset] <= "9" else
     {
-        return (nil, offset);
+        return (nil, offset, nil);
     }
     curOffset += 1;
     
@@ -233,7 +241,7 @@ func NumberTokenGenerator(s:String, offset: Int) -> (JsonLexToken?, Int)
         curOffset += 1;
         if (readDigits(s, offset: &curOffset) == 0)
         {
-            return (JsonLexToken.ERROR("not a valid number at position: \(offset)"), -1);
+            return (nil, -1, "not a valid number at position: \(offset)");
         }
     }
     
@@ -245,11 +253,11 @@ func NumberTokenGenerator(s:String, offset: Int) -> (JsonLexToken?, Int)
         tryReadSingleChar(s, c: "-", offset: &curOffset);
         if (readDigits(s, offset: &curOffset) == 0)
         {
-            return (JsonLexToken.ERROR("not a valid number at position: \(offset)"), -1);
+            return (nil, -1, "not a valid number at position: \(offset)");
         }
     }
     
-    return (JsonLexToken.NUMBER((s.subString(offset, length: curOffset - offset) as NSString).doubleValue), curOffset);
+    return (JsonLexToken.NUMBER((s.subString(offset, length: curOffset - offset) as NSString).doubleValue), curOffset, nil);
 }
 
 // 定义json 中 token generator 列表
@@ -267,38 +275,26 @@ public class JsonLexer
         
     }
     
-    // parser, 输入一段合法或者非法的json字符串，返回token 列表，如果包含错误， JsonLexToken中会包含 ERROR
-    public func ParseJsonFromString(s:String) -> [JsonLexToken]
+    // parser, 输入一段合法或者非法的json字符串，返回token 列表，如果包含错误， String? != nil
+    public func ParseJsonFromString(s:String) -> ([JsonLexToken], String?)
     {
         var currentOffset:Int = 0;
         var result: [JsonLexToken] = [];
         
         while (currentOffset < s.length) {
-            var shouldContinue = false;
-            
             for tokenGen in tokenGeneratorList {
-                let (token, offset) = tokenGen(s, currentOffset);
+                let (token, offset, errorMessage) = tokenGen(s, currentOffset);
                 if (token != nil) {
                     result.append(token!);
                     currentOffset = offset;
-                    
-                    switch (token!) {
-                    case .ERROR(_):
-                        shouldContinue = false;
-                    default:
-                        shouldContinue = true;
-                    }
-                    
                     break;
                 }
-            }
-            
-            if (!shouldContinue) {
-                result.append(JsonLexToken.ERROR("cannot continue: \(currentOffset)"));
-                break;
+                if (errorMessage != nil) {
+                    return (result, errorMessage);
+                }
             }
         }
         
-        return result;
+        return (result, nil);
     }
 }
