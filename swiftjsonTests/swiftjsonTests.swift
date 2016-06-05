@@ -77,7 +77,7 @@ class JsonLexerTestCase : XCTestCase {
         let (tokens, error) = jsonLexer.ParseJsonFromString("{\"name\": \"pigoneand\", \"age\": 23}");
         XCTAssertNil(error);
         XCTAssertTrue(tokens.contains(JsonLexToken.STRING("name")));
-        XCTAssertTrue(tokens.contains(JsonLexToken.NUMBER(28)));
+        XCTAssertTrue(tokens.contains(JsonLexToken.NUMBER(23)));
     }
     
     func testPerformanceExample() {
