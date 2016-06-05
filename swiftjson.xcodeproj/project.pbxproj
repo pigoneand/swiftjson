@@ -12,6 +12,8 @@
 		A20CEFAA1CDC333200607465 /* common_string_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CEF541CD642A100607465 /* common_string_extension.swift */; };
 		A20CEFB21CDC350100607465 /* swiftjsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CEFB11CDC350100607465 /* swiftjsonTests.swift */; };
 		A20CEFB41CDC350100607465 /* swiftjson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20CEF921CDC32E200607465 /* swiftjson.framework */; };
+		A20DD7501D044E40002540A5 /* json_lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CEF521CD4B3AF00607465 /* json_lexer.swift */; };
+		A20DD7511D044E40002540A5 /* common_string_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CEF541CD642A100607465 /* common_string_extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +35,6 @@
 		A20CEFAF1CDC350100607465 /* swiftjsonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftjsonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20CEFB11CDC350100607465 /* swiftjsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftjsonTests.swift; sourceTree = "<group>"; };
 		A20CEFB31CDC350100607465 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A2A4B6731CD21D6D00546326 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A2A4B6861CD221FE00546326 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,7 +80,6 @@
 		A2A4B6671CD21D6D00546326 = {
 			isa = PBXGroup;
 			children = (
-				A2A4B6721CD21D6D00546326 /* main */,
 				A2A4B6831CD221FE00546326 /* test */,
 				A20CEF931CDC32E200607465 /* swiftjson */,
 				A20CEFB01CDC350100607465 /* swiftjsonTests */,
@@ -94,15 +94,6 @@
 				A20CEFAF1CDC350100607465 /* swiftjsonTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A2A4B6721CD21D6D00546326 /* main */ = {
-			isa = PBXGroup;
-			children = (
-				A2A4B6731CD21D6D00546326 /* main.swift */,
-			);
-			name = main;
-			path = swiftjson;
 			sourceTree = "<group>";
 		};
 		A2A4B6831CD221FE00546326 /* test */ = {
@@ -233,6 +224,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A20DD7501D044E40002540A5 /* json_lexer.swift in Sources */,
+				A20DD7511D044E40002540A5 /* common_string_extension.swift in Sources */,
 				A20CEFB21CDC350100607465 /* swiftjsonTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,10 +271,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = swiftjson/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pigoneand.swiftjson;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -380,6 +375,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -390,6 +386,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -404,6 +401,7 @@
 				A20CEFA51CDC32E200607465 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A20CEFB71CDC350100607465 /* Build configuration list for PBXNativeTarget "swiftjsonTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +410,7 @@
 				A20CEFB91CDC350100607465 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A2A4B66B1CD21D6D00546326 /* Build configuration list for PBXProject "swiftjson" */ = {
 			isa = XCConfigurationList;

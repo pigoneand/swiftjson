@@ -13,7 +13,7 @@ import Foundation
  * 例如： { "name": "pigoneand" } = [ BEGIN_OBJECT, STRING, NAME_SEPARATOR, STRING, END_OBJECT ]
  * ref http://www.ietf.org/rfc/rfc4627.txt
  */
-enum JsonLexToken
+public enum JsonLexToken
 {
     case BEGIN_ARRAY        // [
     case END_ARRAY          // ]
@@ -69,7 +69,7 @@ enum JsonLexToken
 
 extension JsonLexToken : Equatable {}
 
-func ==(lhs: JsonLexToken, rhs: JsonLexToken) -> Bool {
+public func ==(lhs: JsonLexToken, rhs: JsonLexToken) -> Bool {
     switch (lhs, rhs) {
     case (let .NUMBER(n1), let .NUMBER(n2)):
         return n1 == n2;
@@ -83,6 +83,10 @@ func ==(lhs: JsonLexToken, rhs: JsonLexToken) -> Bool {
         return true
     case (.NULL, .NULL):
         return true
+    case (.BEGIN_OBJECT, .BEGIN_OBJECT):
+        return true
+    case(.END_OBJECT, .END_OBJECT):
+        return true;
         
     default:
         return false
@@ -256,38 +260,45 @@ let tokenGeneratorList : [JsonLexTokenGenerator] = [
     NumberTokenGenerator
 ]
 
-// parser, 输入一段合法或者非法的json字符串，返回token 列表，如果包含错误， JsonLexToken中会包含 ERROR
-func JsonLexParser(s:String) -> [JsonLexToken]
+public class JsonLexer
 {
-    var currentOffset:Int = 0;
-    var result: [JsonLexToken] = [];
-    
-    while (currentOffset < s.length) {
-        var shouldContinue = false;
+    public init()
+    {
         
-        for tokenGen in tokenGeneratorList {
-            let (token, offset) = tokenGen(s, currentOffset);
-            if (token != nil) {
-                result.append(token!);
-                currentOffset = offset;
-                
-                switch (token!) {
-                case .ERROR(_):
-                    shouldContinue = false;
-                default:
-                    shouldContinue = true;
+    }
+    
+    // parser, 输入一段合法或者非法的json字符串，返回token 列表，如果包含错误， JsonLexToken中会包含 ERROR
+    public func ParseJsonFromString(s:String) -> [JsonLexToken]
+    {
+        var currentOffset:Int = 0;
+        var result: [JsonLexToken] = [];
+        
+        while (currentOffset < s.length) {
+            var shouldContinue = false;
+            
+            for tokenGen in tokenGeneratorList {
+                let (token, offset) = tokenGen(s, currentOffset);
+                if (token != nil) {
+                    result.append(token!);
+                    currentOffset = offset;
+                    
+                    switch (token!) {
+                    case .ERROR(_):
+                        shouldContinue = false;
+                    default:
+                        shouldContinue = true;
+                    }
+                    
+                    break;
                 }
-                
+            }
+            
+            if (!shouldContinue) {
+                result.append(JsonLexToken.ERROR("cannot continue: \(currentOffset)"));
                 break;
             }
         }
         
-        if (!shouldContinue) {
-            result.append(JsonLexToken.ERROR("cannot continue: \(currentOffset)"));
-            break;
-        }
+        return result;
     }
-    
-    return result;
 }
-
